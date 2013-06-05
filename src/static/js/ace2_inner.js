@@ -3896,6 +3896,7 @@ function Ace2Inner(){
   }
   editorInfo.ace_doUndoRedo = doUndoRedo;
 
+
   function updateBrowserSelectionFromRep()
   {
     // requires normalized DOM!
@@ -4244,6 +4245,8 @@ function Ace2Inner(){
       else return null;
     }
   }
+
+  editorInfo.ace_getSelection = getSelection;
 
   function setSelection(selection)
   {
@@ -4904,6 +4907,8 @@ function Ace2Inner(){
       return Math.round(pixLoc);
     }
   }
+
+
 
   function getPageHeight()
   {

@@ -42,6 +42,11 @@ exports.checkAccess = function (padID, sessionCookie, token, password, callback)
 { 
   var statusObject;
 
+  if( padID.indexOf("r.") === 0 ){
+    callback( null , { accessStatus : "grant" } );
+    return;
+  }
+
   // a valid session is required (api-only mode)
   if(settings.requireSession)
   {

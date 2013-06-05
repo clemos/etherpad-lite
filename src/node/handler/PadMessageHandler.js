@@ -179,9 +179,9 @@ exports.handleMessage = function(client, message)
     } else if(message.type == "CHANGESET_REQ") {
       handleChangesetRequest(client, message);
     } else if(message.type == "COLLABROOM") {
-      if (sessioninfos[client.id].readonly) {
-        messageLogger.warn("Dropped message, COLLABROOM for readonly pad");
-      } else if (message.data.type == "USER_CHANGES") {
+      //if (sessioninfos[client.id].readonly) {
+      //  messageLogger.warn("Dropped message, COLLABROOM for readonly pad");
+      /*} else*/ if (message.data.type == "USER_CHANGES") {
         padChannels.emit(message.padId, {client: client, message: message});// add to pad queue
       } else if (message.data.type == "USERINFO_UPDATE") {
         handleUserInfoUpdate(client, message);

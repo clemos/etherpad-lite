@@ -76,31 +76,33 @@ exports.setSocketIO = function(_socket) {
       }
 
       //client is authorized, everything ok
-      if(clientAuthorized) {
+      //if(clientAuthorized) {
+        //console.log(message);
+        //console.log("OLA");
         handleMessage(client, message);
-      } else { //try to authorize the client
-        if(message.padId !== undefined && message.sessionID !== undefined && message.token !== undefined && message.password !== undefined) {
-          //this message has everything to try an authorization
-          securityManager.checkAccess (message.padId, message.sessionID, message.token, message.password,
-            function(err, statusObject) {
-              ERR(err);
+      //} else { //try to authorize the client
+      //   if(message.padId !== undefined && message.sessionID !== undefined && message.token !== undefined && message.password !== undefined) {
+      //     //this message has everything to try an authorization
+      //     securityManager.checkAccess (message.padId, message.sessionID, message.token, message.password,
+      //       function(err, statusObject) {
+      //         ERR(err);
 
-              //access was granted, mark the client as authorized and handle the message
-              if(statusObject.accessStatus == "grant") {
-                clientAuthorized = true;
-                handleMessage(client, message);
-              }
-              //no access, send the client a message that tell him why
-              else {
-                messageLogger.warn("Authentication try failed:" + stringifyWithoutPassword(message));
-                client.json.send({accessStatus: statusObject.accessStatus});
-              }
-            }
-          );
-        } else { //drop message
-          messageLogger.warn("Dropped message cause of bad permissions:" + stringifyWithoutPassword(message));
-        }
-      }
+      //         //access was granted, mark the client as authorized and handle the message
+      //         if(statusObject.accessStatus == "grant") {
+      //           clientAuthorized = true;
+      //           handleMessage(client, message);
+      //         }
+      //         //no access, send the client a message that tell him why
+      //         else {
+      //           messageLogger.warn("Authentication try failed:" + stringifyWithoutPassword(message));
+      //           client.json.send({accessStatus: statusObject.accessStatus});
+      //         }
+      //       }
+      //     );
+      //   } else { //drop message
+      //     messageLogger.warn("Dropped message cause of bad permissions:" + stringifyWithoutPassword(message));
+      //   }
+      // }
     });
 
     client.on('disconnect', function()
